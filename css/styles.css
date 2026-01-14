@@ -1,0 +1,9 @@
+/* This file contains the main styles for the Reina del Flow project. */
+
+/* Importing CSS variables */
+ 
+@import url('./base.css');
+@import url('./header-footer.css');
+@import url('./hero.css');
+@import url('./content.css');
+@import url('./player.css');

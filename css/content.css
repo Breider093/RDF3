@@ -1,0 +1,78 @@
+.content {
+    background: linear-gradient(180deg, rgba(16, 18, 25, 0.92) 0%, rgba(11, 12, 16, 0.98) 100%);
+    border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.content__inner {
+    padding-top: 18px;
+    padding-bottom: 34px;
+}
+
+.content__title {
+    margin: 0 0 10px;
+    font-size: 18px;
+    font-weight: 600;
+    color: rgba(233, 238, 242, 0.95);
+}
+
+.content__lead {
+    margin: 0 0 22px;
+    font-size: 13px;
+    color: rgba(243,241,242,0.78);
+    max-width: 980px;
+}
+
+.seasons {
+    display: grid;
+    gap: 10px;
+    max-width: 520px;
+}
+
+.season {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text);
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.season:hover {
+    background: rgba(230, 59, 110, 0.08);
+    border-color: rgba(230, 59, 110, 0.28);
+}
+
+.season__icon {
+    width: 18px;
+    height: 18px;
+    position: relative;
+    flex: 0 0 18px;
+}
+
+.season__icon::before,
+.season__icon::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 18px;
+    height: 2px;
+    background: rgba(243,241,242,0.7);
+    transform: translateY(-50%);
+    opacity: 0.85;
+}
+
+.season__icon::after {
+    width: 10px;
+    transform: translateY(-50%) rotate(90deg);
+    transform-origin: 9px 1px;
+    opacity: 0.6;
+}
+
+.season__text {
+    font-weight: 600;
+}

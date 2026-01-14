@@ -1,0 +1,89 @@
+:root {
+    --bg: #0b0c10;
+    --bg-2: #101219;
+    --surface: rgba(255,255,255,0.04);
+    --surface-2: rgba(255,255,255,0.06);
+    --border: rgba(255,255,255,0.08);
+    --text: #f3f1f2;
+    --muted: rgba(243,241,242,0.74);
+    --heading-color: #ffffff;
+    --accent: #e63b6e;
+    --accent-2: #8d1630;
+    --accent-soft: rgba(230, 59, 110, 0.18);
+    --warm-gray: rgba(188, 176, 176, 0.14);
+    --warm-gray-2: rgba(188, 176, 176, 0.08);
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    background: radial-gradient(1200px 700px at 15% 10%, rgba(230, 59, 110, 0.10), rgba(11, 12, 16, 0.0) 55%),
+        radial-gradient(900px 520px at 85% 35%, rgba(141, 22, 48, 0.16), rgba(11, 12, 16, 0.0) 55%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+    color: var(--text);
+    position: relative;
+}
+
+.page-bg {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 140vh;
+    background-image: url('../images/background.jpg');
+    background-size: cover;
+    background-position: center top;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.page-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(900px 420px at 25% 20%, rgba(230, 59, 110, 0.22), rgba(0,0,0,0) 62%),
+        linear-gradient(180deg, rgba(6, 8, 12, 0.72) 0%, rgba(6, 8, 12, 0.42) 40%, rgba(6, 8, 12, 0.10) 70%);
+}
+
+.page-bg::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 55vh;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, var(--bg) 55%, var(--bg-2) 100%);
+}
+
+.has-page-bg #site-header,
+.has-page-bg main,
+.has-page-bg #site-footer {
+    position: relative;
+    z-index: 1;
+}
+
+.has-page-bg .hero {
+    background-image: none;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+main {
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--heading-color);
+}
+
+p {
+    line-height: 1.6;
+}

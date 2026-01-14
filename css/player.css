@@ -1,0 +1,239 @@
+.player-page {
+    position: relative;
+    padding: 18px 0 0;
+    background-image: url('../images/background.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.player-page__overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(1200px 420px at 50% 20%, rgba(255,255,255,0.08), rgba(6, 14, 18, 0.86) 60%, rgba(6, 14, 18, 0.92) 100%);
+}
+
+.player-page__inner {
+    position: relative;
+    z-index: 1;
+    padding-top: 6px;
+    padding-bottom: 0;
+}
+
+.lang {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 7px 10px;
+    border-radius: 4px;
+    background: rgba(30, 30, 30, 0.72);
+    border: 1px solid rgba(255,255,255,0.08);
+    width: 120px;
+}
+
+.lang__label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+}
+
+.lang__sub {
+    font-size: 10px;
+    color: rgba(233, 238, 242, 0.7);
+}
+
+.player {
+    margin-top: 14px;
+    border: 1px solid rgba(255,255,255,0.09);
+    background: rgba(0,0,0,0.7);
+}
+
+.player__embed {
+    width: 100%;
+    height: clamp(340px, 48vw, 560px);
+    background: #000;
+}
+
+.player__frame {
+    width: 100%;
+    height: 100%;
+    display: block;
+    background: #000;
+}
+
+.player-nav {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 0;
+    color: rgba(233, 238, 242, 0.9);
+}
+
+.player-nav__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: inherit;
+    font-size: 12px;
+}
+
+.player-nav__link:last-child {
+    justify-self: end;
+}
+
+.player-nav__center {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: inherit;
+    font-size: 12px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+}
+
+.player-nav__menu {
+    width: 14px;
+    height: 10px;
+    position: relative;
+    display: inline-block;
+}
+
+.player-nav__menu::before,
+.player-nav__menu::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: rgba(233, 238, 242, 0.75);
+    border-radius: 2px;
+}
+
+.player-nav__menu::before {
+    top: 0;
+    box-shadow: 0 4px 0 rgba(233, 238, 242, 0.75), 0 8px 0 rgba(233, 238, 242, 0.75);
+}
+
+.episode-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.episode-header__social {
+    display: flex;
+    gap: 10px;
+    padding-top: 2px;
+}
+
+.rating {
+    display: inline-flex;
+    gap: 10px;
+    align-items: center;
+    margin: 10px 0 14px;
+}
+
+.rating__stars {
+    color: #f3c220;
+    letter-spacing: 2px;
+    font-size: 14px;
+}
+
+.rating__meta {
+    font-size: 12px;
+    color: rgba(233, 238, 242, 0.75);
+}
+
+.episodes {
+    margin-top: 22px;
+}
+
+.episodes__title {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(233, 238, 242, 0.85);
+    margin-bottom: 10px;
+}
+
+.episodes__list {
+    display: grid;
+    gap: 10px;
+}
+
+.episode-item {
+    display: grid;
+    grid-template-columns: 22px 54px 1fr 34px;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: inherit;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.04);
+}
+
+.episode-item:hover {
+    background: rgba(255,255,255,0.04);
+    border-color: rgba(255,255,255,0.07);
+}
+
+.episode-item--active {
+    background: rgba(230, 59, 110, 0.10);
+    border-color: rgba(230, 59, 110, 0.35);
+}
+
+.episode-item--active .episode-item__play {
+    border-color: rgba(230, 59, 110, 0.75);
+}
+
+.episode-item--active .episode-item__play::before {
+    border-left-color: rgba(230, 59, 110, 0.95);
+}
+
+.episode-item__num {
+    font-size: 12px;
+    color: rgba(233, 238, 242, 0.65);
+}
+
+.episode-item__thumb {
+    width: 54px;
+    height: 32px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.episode-item__name {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.episode-item__play {
+    width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    border: 2px solid rgba(233, 238, 242, 0.6);
+    position: relative;
+    justify-self: end;
+}
+
+.episode-item__play::before {
+    content: '';
+    position: absolute;
+    left: 11px;
+    top: 8px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid rgba(233, 238, 242, 0.85);
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+}
