@@ -2,12 +2,9 @@
     position: sticky;
     top: 0;
     z-index: 50;
-    background:
-        radial-gradient(820px 220px at 25% 30%, rgb(230, 59, 110), rgba(0,0,0,0) 62%),
-        linear-gradient(90deg, rgb(244, 43, 43) 0%, rgba(252, 87, 87, 0.884) 55%, rgba(0,0,0,0) 100%),
-        rgba(11, 12, 16, 0.62);
-    border-bottom: 1px solid rgba(249, 39, 102, 0.888);
-    backdrop-filter: blur(12px);
+    background: transparent;
+    border-bottom: 0;
+    backdrop-filter: none;
 }
 
 .site-header__inner {
@@ -46,22 +43,23 @@
     text-decoration: none;
     padding: 8px 10px;
     border-radius: 10px;
-    border: 1px solid rgba(255,255,255,0.08);
-    background: linear-gradient(180deg, var(--warm-gray) 0%, rgba(0,0,0,0) 140%);
+    border: 0;
+    background: transparent;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.55);
 }
 
 .nav__link:hover {
-    background: rgba(230, 59, 110, 0.14);
-    border-color: rgba(230, 59, 110, 0.34);
+    color: rgba(255,255,255,0.95);
+    text-decoration: underline;
+    text-decoration-color: rgba(255,255,255,0.55);
+    text-underline-offset: 4px;
 }
 
 .site-footer {
     margin-top: 28px;
     padding: 18px 0;
-    background:
-        radial-gradient(900px 260px at 20% 0%, rgba(141, 22, 48, 0.30), rgba(0,0,0,0) 65%),
-        linear-gradient(180deg, rgba(188, 176, 176, 0.10) 0%, rgba(188, 176, 176, 0.04) 55%, rgba(11, 12, 16, 0.88) 100%);
-    border-top: 1px solid rgba(230, 59, 110, 0.16);
+    background: transparent;
+    border-top: 0;
 }
 
 .site-footer__inner {
@@ -97,11 +95,14 @@
     text-decoration: none;
     padding: 6px 10px;
     border-radius: 10px;
-    border: 1px solid rgba(255,255,255,0.08);
-    background: linear-gradient(180deg, var(--warm-gray-2) 0%, rgba(0,0,0,0) 160%);
+    border: 0;
+    background: transparent;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.55);
 }
 
 .site-footer__link:hover {
-    background: rgba(230, 59, 110, 0.12);
-    border-color: rgba(230, 59, 110, 0.28);
+    color: rgba(255,255,255,0.95);
+    text-decoration: underline;
+    text-decoration-color: rgba(255,255,255,0.55);
+    text-underline-offset: 4px;
 }

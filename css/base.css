@@ -24,12 +24,14 @@ body {
     position: relative;
 }
 
+body.has-page-bg {
+    background: transparent;
+}
+
 .page-bg {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    height: 140vh;
+    position: fixed;
+    inset: 0;
+    height: 100vh;
     background-image: url('../images/background.jpg');
     background-size: cover;
     background-position: center top;

@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="css/styles.css">
     <script src="js/main.js" defer></script>
 </head>
-<body>
+<body class="has-page-bg">
+    <div class="page-bg" aria-hidden="true"></div>
     <div id="site-header"></div>
     <main>
         <section class="player-page" aria-label="Reproductor">
@@ -96,9 +97,47 @@
                 </div>
 
                 <div class="episodes">
-                    <div class="episodes__title">REINA DEL FLOW - Temporada 3</div>
+                    <div class="episodes__head">
+                        <div class="episodes__heading">Episodios</div>
+                        <button class="season-pill" type="button" id="seasonPill">Temporada 3</button>
+                    </div>
                     <div class="episodes__list" id="episodeList" role="list"></div>
                 </div>
+
+                <section class="more-info" aria-label="Más información">
+                    <h3 class="more-info__title">Más info</h3>
+                    <div class="more-info__grid">
+                        <div class="info-card">
+                            <div class="info-card__title">Ver offline</div>
+                            <div class="info-card__text">Disponible para descarga</div>
+
+                            <div class="info-card__spacer"></div>
+
+                            <div class="info-card__title">Géneros</div>
+                            <div class="info-card__text">Música, Series dramáticas, Telenovelas sobre crimen, De Colombia, Telenovelas y Series sobre crímenes</div>
+
+                            <div class="info-card__spacer"></div>
+
+                            <div class="info-card__title">Esta serie es…</div>
+                            <div class="info-card__text">Emotiva, Telenovela, Policía de incógnito, De Colombia, Aclamado por la crítica, Detectives, Música, Drama y Serie</div>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="info-card__title">Audio</div>
+                            <div class="info-card__text">Español – Audio descriptivo y Español [Original]</div>
+
+                            <div class="info-card__spacer"></div>
+
+                            <div class="info-card__title">Subtítulos</div>
+                            <div class="info-card__text">Español</div>
+                        </div>
+
+                        <div class="info-card">
+                            <div class="info-card__title">Elenco</div>
+                            <div class="info-card__text">Carolina Ramírez, Carlos Torres, Andrés Sandoval, Adriana Arango, Mabel Moreno, Marcelo Dos Santos, Juan Palau, Luis Alfredo Velasco, Pacho Rueda y Diana Wiswell</div>
+                        </div>
+                    </div>
+                </section>
             </div>
         </section>
     </main>
@@ -127,8 +166,13 @@
                 const episodeListEl = document.getElementById('episodeList');
                 const leadEl = document.getElementById('episodeLead');
                 const descEl = document.getElementById('episodeDesc');
+                const seasonPill = document.getElementById('seasonPill');
 
                 navEpisodes.href = `season-${season}.html`;
+
+                if (seasonPill) {
+                    seasonPill.textContent = `Temporada ${season}`;
+                }
 
                 const res = await fetch('data/episodes.json', { cache: 'no-store' });
                 const data = await res.json();
@@ -166,25 +210,31 @@
                         }
 
                         const a = document.createElement('a');
-                        a.className = 'episode-item';
+                        a.className = 'episode-card';
                         a.setAttribute('role', 'listitem');
                         a.href = buildEpisodeUrl(season, item.number);
 
                         if (item.number === currentNumber) {
-                            a.classList.add('episode-item--active');
+                            a.classList.add('episode-card--active');
                             a.setAttribute('aria-current', 'page');
                         }
 
                         const itemTitle = item.title ? item.title : `Episodio ${item.number}`;
+                        const itemDesc = item.description ? item.description : '';
+                        const duration = item.duration || item.runtime || '';
                         a.innerHTML = `
-                            <span class="episode-item__num">${item.number}</span>
-                            <span class="episode-item__thumb" aria-hidden="true"></span>
-                            <span class="episode-item__name">${itemTitle}</span>
-                            <span class="episode-item__play" aria-hidden="true"></span>
+                            <span class="episode-card__media" aria-hidden="true">
+                                <span class="episode-card__thumb"></span>
+                                ${duration ? `<span class=\"episode-card__duration\">${duration}</span>` : ''}
+                            </span>
+                            <span class="episode-card__body">
+                                <span class="episode-card__title">${item.number}. «${itemTitle}»</span>
+                                <span class="episode-card__desc">${itemDesc}</span>
+                            </span>
                         `;
 
                         if (item.thumbnail) {
-                            const thumbEl = a.querySelector('.episode-item__thumb');
+                            const thumbEl = a.querySelector('.episode-card__thumb');
                             if (thumbEl) {
                                 thumbEl.style.backgroundImage = `url(${JSON.stringify(item.thumbnail).slice(1, -1)})`;
                             }
