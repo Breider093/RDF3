@@ -135,6 +135,16 @@ body.has-page-bg .player-page {
     padding-top: 2px;
 }
 
+.episode-download {
+    text-decoration: none;
+}
+
+.episode-download.is-disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
 .rating {
     display: inline-flex;
     gap: 10px;

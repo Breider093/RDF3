@@ -3,80 +3,355 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reina del Flow</title>
+    <title>La Reina del Flow - Serie Original</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
     <script src="js/main.js" defer></script>
 </head>
-<body class="has-page-bg">
+<body class="has-page-bg index-hero">
     <div class="page-bg" aria-hidden="true"></div>
     <div id="site-header"></div>
     <main>
         <section class="hero" aria-label="Portada">
-            <div class="hero__overlay"></div>
-            <div class="hero__content container">
-                <div class="hero__panel">
-                    <h1 class="hero__title">Serie REINA DEL FLOW</h1>
-                    <div class="hero__meta">Título Original: REINA DEL FLOW&nbsp;&nbsp; 2018&nbsp;&nbsp; 45min</div>
+            <video id="bgVideo" class="vh-bg-video" autoplay muted loop playsinline preload="metadata">
+                <source src="https://occ-0-1462-116.1.nflxso.net/so/soa1/911/1999606631698020097.mp4" type="video/mp4">
+            </video>
+            <img id="videoPoster" class="vh-video-poster" src="https://occ-0-1462-116.1.nflxso.net/dnm/api/v6/6AYY37jfdO6hpXcMjf9Yu5cnmO0/AAAABW1qNGYtnOrlN3JLvrdhpXqRV7gDjco-ccO_qYGF4p5gr5Cb1EpDqQqAmnOHxl9kL44nSXqr0_M85tNFH4ZWgPky_1PFZkVlhYm3.webp?r=457" alt="La Reina del Flow">
+            <div class="vh-hero-overlay"></div>
 
-                    <div class="chips" aria-label="Etiquetas">
-                        <span class="chip">Drama</span>
-                        <span class="chip">Música</span>
-                        <span class="chip">Romance</span>
-                    </div>
+            <div class="vh-hero-content container">
+                <img src="https://occ-0-1462-116.1.nflxso.net/dnm/api/v6/S4oi7EPZbv2UEPaukW54OORa0S8/AAAABSliaoY4IF0arWRs_DxUxc5IxvOt00Z0ag-7upVLoJnQaKuZVsuJ4-O-4A27J7UlPZWbZuIIYs0my7UinpQSvNe7HEYexDmDzA.webp?r=b39" alt="La Reina del Flow" class="vh-series-logo">
 
-                    <p class="hero__desc">
-                        Una historia de música, ambición y venganza. Yeimy Montoya busca recuperar su vida mientras el destino la enfrenta a quienes la traicionaron.
-                    </p>
-                    <div class="hero__details">
-                        <div><span class="hero__label">Director:</span> Andrés Salgado</div>
-                        <div><span class="hero__label">Género:</span> Drama, Música, Romance</div>
-                        <div><span class="hero__label">Actores:</span> Carolina Ramírez, Carlos Torres, Andrés Sandoval</div>
-                    </div>
+                <div class="vh-hero-buttons" aria-label="Acciones">
+                    <button class="vh-btn vh-btn-play" type="button" id="heroPlayBtn">
+                        <span id="heroPlayText">Pausar</span>
+                    </button>
+                    <button class="vh-btn vh-btn-info" type="button" id="heroInfoBtn">
+                        <span>Más información</span>
+                    </button>
+                    <a class="vh-btn vh-btn-link" href="season-3.html">Ver Temporada 3</a>
+                </div>
+            </div>
 
-                    <div class="hero__actions" aria-label="Acciones">
-                        <a class="btn btn--primary" href="season-3.html">
-                            <span class="btn__icon" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
-                            </span>
-                            <span>Ver Temporada 3</span>
-                        </a>
-                        <a class="btn btn--ghost" href="#">
-                            <span class="btn__icon" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M12 21s-7-4.4-9.3-8.4C.5 9 2.3 6.3 5.3 6.1c1.7-.1 3 .7 3.7 1.7.7-1 2-1.8 3.7-1.7 3 .2 4.8 2.9 2.6 6.5C19 16.6 12 21 12 21z"/></svg>
-                            </span>
-                            <span>Agregar a Favoritos</span>
-                        </a>
-                    </div>
+            <div class="vh-video-controls" aria-label="Controles de video">
+                <button class="vh-control-btn" type="button" id="pauseBtn" title="Reproducir/Pausar" aria-label="Reproducir o pausar">
+                    <svg class="vh-control-icon" viewBox="0 0 24 24" id="pauseIcon" aria-hidden="true">
+                        <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+                    </svg>
+                    <svg class="vh-control-icon" viewBox="0 0 24 24" id="playIconSvg" style="display: none;" aria-hidden="true">
+                        <path d="M8 5v14l11-7z"/>
+                    </svg>
+                </button>
 
-                    <div class="hero__social" aria-label="Redes sociales">
-                        <a class="social" href="#" aria-label="Facebook">
-                            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-                                <path fill="currentColor" d="M13.5 22v-8h2.7l.4-3H13.5V9.1c0-.9.3-1.6 1.7-1.6H16.7V4.9c-.8-.1-1.8-.2-3-.2-3 0-5 1.8-5 5.1V11H6v3h2.7v8h4.8z"/>
-                            </svg>
-                        </a>
-                        <a class="social" href="#" aria-label="Twitter">
-                            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-                                <path fill="currentColor" d="M22 5.9c-.7.3-1.4.5-2.2.6.8-.5 1.3-1.2 1.6-2.1-.7.4-1.5.8-2.4.9-.7-.7-1.6-1.1-2.7-1.1-2.2 0-3.8 2-3.3 4.1-3-.2-5.7-1.6-7.5-3.8-1 1.8-.5 4.1 1.2 5.4-.6 0-1.2-.2-1.7-.5 0 1.9 1.3 3.5 3.2 3.9-.5.1-1 .1-1.6.1.4 1.6 1.9 2.8 3.6 2.8-1.3 1-3 1.6-4.7 1.6H2c1.8 1.2 4 1.9 6.4 1.9 7.8 0 12.2-6.6 11.9-12.6.8-.6 1.4-1.2 1.9-2z"/>
-                            </svg>
-                        </a>
-                        <a class="social" href="#" aria-label="WhatsApp">
-                            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-                                <path fill="currentColor" d="M20 3.9A10 10 0 0 0 3.6 19.5L3 22l2.6-.6A10 10 0 0 0 20 3.9zm-8 16.5a8.3 8.3 0 0 1-4.2-1.1l-.3-.2-2.5.6.6-2.4-.2-.3A8.3 8.3 0 1 1 12 20.4zm4.6-6.3c-.2-.1-1.3-.6-1.5-.7s-.4-.1-.6.1-.7.7-.9.9-.3.2-.5.1a6.7 6.7 0 0 1-2-1.2 7.6 7.6 0 0 1-1.4-1.7c-.1-.2 0-.4.1-.5l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.3 0-.5s-.6-1.5-.8-2c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.2-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.7 4.4 3.8.6.3 1.1.4 1.5.5.6.2 1.2.2 1.6.1.5-.1 1.3-.5 1.5-1s.2-1 .2-1.1c0-.1-.2-.2-.4-.3z"/>
-                            </svg>
-                        </a>
-                        <a class="social" href="#" aria-label="Telegram">
-                            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-                                <path fill="currentColor" d="M21.9 4.6c.2-.8-.5-1.5-1.3-1.2L2.9 10.2c-.9.4-.8 1.7.1 2l4.8 1.5 1.8 5.7c.3.9 1.5 1 2 .2l2.6-4.2 4.7 3.4c.8.6 1.9.1 2.1-.9l1.9-13.4zM9.7 13l9.3-6.1-7.6 7.5-.3 3.5-1.7-5.2-.1-.3 0 0 .4-.2z"/>
-                            </svg>
-                        </a>
+                <button class="vh-control-btn" type="button" id="muteBtn" title="Activar/Desactivar sonido" aria-label="Activar o desactivar sonido">
+                    <svg class="vh-control-icon" viewBox="0 0 24 24" id="mutedIcon" aria-hidden="true">
+                        <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+                    </svg>
+                    <svg class="vh-control-icon" viewBox="0 0 24 24" id="unmutedIcon" style="display: none;" aria-hidden="true">
+                        <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                    </svg>
+                </button>
+
+                <button class="vh-control-btn" type="button" id="openModalBtn" title="Pantalla completa" aria-label="Pantalla completa">
+                    <svg class="vh-control-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <section class="vh-info-section container" aria-label="Información">
+            <div class="vh-info-card" id="infoCard">
+                <h1 class="vh-info-title">La Reina del Flow</h1>
+                <div class="vh-info-metadata" aria-label="Metadata">
+                    <div class="vh-metadata-item"><span>2018</span></div>
+                    <div class="vh-metadata-item"><span>3 Temporadas</span></div>
+                    <div class="vh-metadata-item"><span class="vh-badge">13+</span></div>
+                    <div class="vh-metadata-item"><span>Drama</span></div>
+                </div>
+                <p class="vh-info-synopsis">
+                    Después de pasar diecisiete años en la cárcel injustamente, una compositora talentosa busca vengarse de los hombres que la hundieron y mataron a su familia.
+                </p>
+                <div class="vh-info-cast" aria-label="Elenco">
+                    <h3 class="vh-cast-title">Elenco Principal</h3>
+                    <div class="vh-cast-list">
+                        <div class="vh-cast-member">Carolina Ramírez</div>
+                        <div class="vh-cast-member">Carlos Torres</div>
+                        <div class="vh-cast-member">Andrés Sandoval</div>
                     </div>
                 </div>
             </div>
+
+            <div class="episodes" aria-label="Episodios">
+                <div class="episodes__head">
+                    <div class="episodes__heading">Episodios</div>
+                    <button class="season-pill" type="button" id="homeSeasonPill">Temporada 3</button>
+                </div>
+                <div class="episodes__list" id="homeEpisodeList" role="list"></div>
+            </div>
         </section>
     </main>
+
+    <div class="vh-video-modal" id="videoModal" aria-hidden="true">
+        <div class="vh-modal-content" role="dialog" aria-modal="true" aria-label="Video en pantalla completa">
+            <button class="vh-modal-close" type="button" id="closeModalBtn" aria-label="Cerrar">✕</button>
+            <video id="modalVideo" class="vh-modal-video" playsinline preload="metadata">
+                <source src="https://occ-0-1462-116.1.nflxso.net/so/soa1/911/1999606631698020097.mp4" type="video/mp4">
+            </video>
+            <img id="modalPoster" class="vh-modal-poster" src="images/background.jpg" alt="La Reina del Flow">
+            <div class="vh-modal-controls" aria-label="Controles">
+                <button class="vh-modal-control-btn" type="button" id="modalPlayBtn" aria-label="Reproducir o pausar">
+                    <svg class="vh-control-icon" viewBox="0 0 24 24" id="modalPauseIcon" aria-hidden="true">
+                        <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+                    </svg>
+                    <svg class="vh-control-icon" viewBox="0 0 24 24" id="modalPlayIcon" style="display: none;" aria-hidden="true">
+                        <path d="M8 5v14l11-7z"/>
+                    </svg>
+                </button>
+                <button class="vh-modal-control-btn" type="button" id="modalMuteBtn" aria-label="Activar o desactivar sonido">
+                    <svg class="vh-control-icon" viewBox="0 0 24 24" id="modalMutedIcon" aria-hidden="true">
+                        <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+                    </svg>
+                    <svg class="vh-control-icon" viewBox="0 0 24 24" id="modalUnmutedIcon" style="display: none;" aria-hidden="true">
+                        <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            const video = document.getElementById('bgVideo');
+            const videoPoster = document.getElementById('videoPoster');
+            const heroPlayBtn = document.getElementById('heroPlayBtn');
+            const heroPlayText = document.getElementById('heroPlayText');
+            const pauseBtn = document.getElementById('pauseBtn');
+            const pauseIcon = document.getElementById('pauseIcon');
+            const playIconSvg = document.getElementById('playIconSvg');
+            const muteBtn = document.getElementById('muteBtn');
+            const mutedIcon = document.getElementById('mutedIcon');
+            const unmutedIcon = document.getElementById('unmutedIcon');
+            const heroInfoBtn = document.getElementById('heroInfoBtn');
+            const infoCard = document.getElementById('infoCard');
+
+            const modal = document.getElementById('videoModal');
+            const modalVideo = document.getElementById('modalVideo');
+            const modalPoster = document.getElementById('modalPoster');
+            const openModalBtn = document.getElementById('openModalBtn');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            const modalPlayBtn = document.getElementById('modalPlayBtn');
+            const modalPauseIcon = document.getElementById('modalPauseIcon');
+            const modalPlayIcon = document.getElementById('modalPlayIcon');
+            const modalMuteBtn = document.getElementById('modalMuteBtn');
+            const modalMutedIcon = document.getElementById('modalMutedIcon');
+            const modalUnmutedIcon = document.getElementById('modalUnmutedIcon');
+
+            function setPosterVisible(targetPoster, isVisible) {
+                if (!targetPoster) return;
+                if (isVisible) {
+                    targetPoster.classList.add('is-visible');
+                } else {
+                    targetPoster.classList.remove('is-visible');
+                }
+            }
+
+            function updateUi() {
+                const paused = !video || video.paused;
+                setPosterVisible(videoPoster, paused);
+                if (pauseIcon && playIconSvg) {
+                    pauseIcon.style.display = paused ? 'none' : 'block';
+                    playIconSvg.style.display = paused ? 'block' : 'none';
+                }
+                if (heroPlayText) {
+                    heroPlayText.textContent = paused ? 'Reproducir' : 'Pausar';
+                }
+                if (mutedIcon && unmutedIcon && video) {
+                    mutedIcon.style.display = video.muted ? 'block' : 'none';
+                    unmutedIcon.style.display = video.muted ? 'none' : 'block';
+                }
+            }
+
+            function updateModalUi() {
+                const paused = !modalVideo || modalVideo.paused;
+                setPosterVisible(modalPoster, paused);
+                if (modalPauseIcon && modalPlayIcon) {
+                    modalPauseIcon.style.display = paused ? 'none' : 'block';
+                    modalPlayIcon.style.display = paused ? 'block' : 'none';
+                }
+                if (modalMutedIcon && modalUnmutedIcon && modalVideo) {
+                    modalMutedIcon.style.display = modalVideo.muted ? 'block' : 'none';
+                    modalUnmutedIcon.style.display = modalVideo.muted ? 'none' : 'block';
+                }
+            }
+
+            function togglePlay() {
+                if (!video) return;
+                const action = video.paused ? video.play() : (video.pause(), Promise.resolve());
+                Promise.resolve(action).catch(function () {
+                    updateUi();
+                });
+                updateUi();
+            }
+
+            function toggleMute() {
+                if (!video) return;
+                video.muted = !video.muted;
+                updateUi();
+            }
+
+            function openModal() {
+                if (!modal) return;
+                modal.classList.add('is-active');
+                modal.setAttribute('aria-hidden', 'false');
+                document.body.classList.add('modal-open');
+                if (modalVideo && video) {
+                    modalVideo.currentTime = video.currentTime || 0;
+                    modalVideo.muted = video.muted;
+                    modalVideo.play().catch(function () {
+                        updateModalUi();
+                    });
+                }
+                updateModalUi();
+            }
+
+            function closeModal() {
+                if (!modal) return;
+                modal.classList.remove('is-active');
+                modal.setAttribute('aria-hidden', 'true');
+                document.body.classList.remove('modal-open');
+                if (modalVideo) {
+                    modalVideo.pause();
+                }
+                updateModalUi();
+            }
+
+            function toggleModalPlay() {
+                if (!modalVideo) return;
+                if (modalVideo.paused) {
+                    modalVideo.play().catch(function () {
+                        updateModalUi();
+                    });
+                } else {
+                    modalVideo.pause();
+                }
+                updateModalUi();
+            }
+
+            function toggleModalMute() {
+                if (!modalVideo) return;
+                modalVideo.muted = !modalVideo.muted;
+                updateModalUi();
+            }
+
+            if (heroPlayBtn) heroPlayBtn.addEventListener('click', togglePlay);
+            if (pauseBtn) pauseBtn.addEventListener('click', togglePlay);
+            if (muteBtn) muteBtn.addEventListener('click', toggleMute);
+            if (heroInfoBtn && infoCard) {
+                heroInfoBtn.addEventListener('click', function () {
+                    infoCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                });
+            }
+            if (openModalBtn) openModalBtn.addEventListener('click', openModal);
+            if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+            if (modalPlayBtn) modalPlayBtn.addEventListener('click', toggleModalPlay);
+            if (modalMuteBtn) modalMuteBtn.addEventListener('click', toggleModalMute);
+
+            if (video) {
+                video.addEventListener('play', updateUi);
+                video.addEventListener('pause', updateUi);
+                window.addEventListener('load', function () {
+                    video.play().catch(function () {
+                        updateUi();
+                    });
+                });
+            }
+            if (modalVideo) {
+                modalVideo.addEventListener('play', updateModalUi);
+                modalVideo.addEventListener('pause', updateModalUi);
+            }
+
+            if (modal) {
+                modal.addEventListener('click', function (e) {
+                    if (e.target === modal) {
+                        closeModal();
+                    }
+                });
+            }
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && modal && modal.classList.contains('is-active')) {
+                    closeModal();
+                }
+            });
+
+            const observer = infoCard
+                ? new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                        }
+                    });
+                }, { threshold: 0.2, rootMargin: '0px 0px -100px 0px' })
+                : null;
+
+            if (observer && infoCard) {
+                observer.observe(infoCard);
+            }
+
+            function buildEpisodeUrl(season, ep) {
+                return `episode.html?season=${encodeURIComponent(season)}&ep=${encodeURIComponent(ep)}`;
+            }
+
+            async function renderHomeEpisodes() {
+                const season = '3';
+                const listEl = document.getElementById('homeEpisodeList');
+                const pillEl = document.getElementById('homeSeasonPill');
+                if (!listEl) return;
+                if (pillEl) pillEl.textContent = `Temporada ${season}`;
+
+                const res = await fetch('data/episodes.json', { cache: 'no-store' });
+                const data = await res.json();
+                const seasonData = data && data.seasons && data.seasons[season];
+                const list = seasonData && Array.isArray(seasonData.episodes) ? seasonData.episodes : [];
+                listEl.innerHTML = '';
+
+                list.forEach(function (item) {
+                    if (!item || typeof item.number !== 'number') return;
+                    const a = document.createElement('a');
+                    a.className = 'episode-card';
+                    a.setAttribute('role', 'listitem');
+                    a.href = buildEpisodeUrl(season, item.number);
+                    const itemTitle = item.title ? item.title : `Episodio ${item.number}`;
+                    const itemDesc = item.description ? item.description : '';
+                    const duration = item.duration || item.runtime || '';
+                    a.innerHTML = `
+                        <span class="episode-card__media" aria-hidden="true">
+                            <span class="episode-card__thumb"></span>
+                            ${duration ? `<span class=\"episode-card__duration\">${duration}</span>` : ''}
+                        </span>
+                        <span class="episode-card__body">
+                            <span class="episode-card__title">${item.number}. «${itemTitle}»</span>
+                            <span class="episode-card__desc">${itemDesc}</span>
+                        </span>
+                    `;
+                    if (item.thumbnail) {
+                        const thumbEl = a.querySelector('.episode-card__thumb');
+                        if (thumbEl) {
+                            thumbEl.style.backgroundImage = `url(${JSON.stringify(item.thumbnail).slice(1, -1)})`;
+                        }
+                    }
+                    listEl.appendChild(a);
+                });
+            }
+
+            renderHomeEpisodes().catch(function () {
+            });
+            updateUi();
+            updateModalUi();
+        })();
+    </script>
     <div id="site-footer"></div>
 </body>
 </html>
