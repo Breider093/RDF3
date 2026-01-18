@@ -143,6 +143,57 @@
         </section>
     </main>
 
+    <!-- Auto-close donation modal -->
+    <div class="donation-modal" id="donationModal" aria-hidden="true">
+        <div class="donation-modal-content" role="dialog" aria-modal="true" aria-label="Apoyo al creador">
+            <button class="donation-modal-close" type="button" id="closeDonationModalBtn" aria-label="Cerrar" disabled>✕</button>
+            <div class="donation-modal-body">
+                <h2 class="donation-modal-title">¡Apoya este contenido! 🇨🇴</h2>
+                <p class="donation-modal-message">
+                    Si eres de Colombia y disfrutas este contenido, quiero que sepas que lo hice con mucho cariño para ti.<br>
+                    Tu apoyo me ayuda a seguir creando y mejorando esta página.<br><br>
+                    Si deseas apoyarme con una donación, puedes hacerlo a través de:<br>
+                    <strong>Bre-B: 3008906589</strong> o <strong>Nequi: 3008906589</strong>.<br><br>
+                    ¡Gracias por tu apoyo y sigue disfrutando de tu serie favorita! ❤️
+                </p>
+                <div class="donation-modal-timer" id="donationTimer">
+                    Esta ventana se cerrará en <span id="timerCountdown">8</span> segundos
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Permanent donation modal -->
+    <div class="donation-modal-permanent" id="donationModalPermanent" aria-hidden="true">
+        <div class="donation-modal-content-permanent" role="dialog" aria-modal="true" aria-label="Apoya este proyecto">
+            <button class="donation-modal-close-permanent" type="button" id="closeDonationModalPermanentBtn" aria-label="Cerrar">✕</button>
+            <div class="donation-modal-body-permanent">
+                <h2 class="donation-modal-title-permanent">❤️ Apoya este proyecto</h2>
+                <p class="donation-modal-message-permanent">
+                    Si eres de Colombia y disfrutas este contenido, quiero que sepas que lo hice con mucho cariño para ti.<br><br>
+                    Tu apoyo me ayuda a seguir creando y mejorando esta página para que sigas disfrutando de tu serie favorita.<br><br>
+                    Si deseas apoyarme con una donación, puedes hacerlo a través de:<br><br>
+                    <div class="donation-methods">
+                        <div class="donation-method">
+                            <strong>📱 Bre-B:</strong> 3008906589
+                        </div>
+                        <div class="donation-method">
+                            <strong>📱 Nequi:</strong> 3008906589
+                        </div>
+                    </div>
+                    <br>
+                    ¡Mil gracias por tu apoyo! Significa mucho para mí. ❤️
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Fixed support button -->
+    <button class="support-button" id="supportButton" type="button" aria-label="Apoyar este proyecto">
+        <span class="support-button-icon">❤️</span>
+        <span class="support-button-text">Apoyar este proyecto</span>
+    </button>
+
     <script>
         (function () {
             function getParams() {
@@ -277,6 +328,134 @@
 
             load().catch(function () {
             });
+
+            // Donation Modal Functionality
+            const donationModal = document.getElementById('donationModal');
+            const donationModalPermanent = document.getElementById('donationModalPermanent');
+            const closeDonationModalBtn = document.getElementById('closeDonationModalBtn');
+            const closeDonationModalPermanentBtn = document.getElementById('closeDonationModalPermanentBtn');
+            const supportButton = document.getElementById('supportButton');
+            const timerCountdown = document.getElementById('timerCountdown');
+            const donationTimer = document.getElementById('donationTimer');
+            
+            let countdownInterval;
+            let closeTimeout;
+            let enableCloseTimeout;
+            let timeRemaining = 8;
+            let modalShown = false;
+
+            function openDonationModal() {
+                if (!donationModal || modalShown) return;
+                
+                modalShown = true;
+                // Reset state
+                timeRemaining = 8;
+                closeDonationModalBtn.disabled = true;
+                timerCountdown.textContent = timeRemaining;
+                
+                // Show modal
+                donationModal.classList.add('is-active');
+                donationModal.setAttribute('aria-hidden', 'false');
+                document.body.classList.add('modal-open');
+                
+                // Enable close button after 3 seconds
+                enableCloseTimeout = setTimeout(function() {
+                    if (closeDonationModalBtn) {
+                        closeDonationModalBtn.disabled = false;
+                    }
+                }, 3000);
+                
+                // Start countdown
+                countdownInterval = setInterval(function() {
+                    timeRemaining--;
+                    timerCountdown.textContent = timeRemaining;
+                    
+                    if (timeRemaining <= 0) {
+                        closeDonationModal();
+                    }
+                }, 1000);
+                
+                // Auto-close after 8 seconds
+                closeTimeout = setTimeout(function() {
+                    closeDonationModal();
+                }, 8000);
+            }
+
+            function closeDonationModal() {
+                if (!donationModal) return;
+                
+                // Clear all timeouts and intervals
+                clearTimeout(closeTimeout);
+                clearTimeout(enableCloseTimeout);
+                clearInterval(countdownInterval);
+                
+                // Hide modal
+                donationModal.classList.remove('is-active');
+                donationModal.setAttribute('aria-hidden', 'true');
+                document.body.classList.remove('modal-open');
+            }
+
+            function openDonationModalPermanent() {
+                if (!donationModalPermanent) return;
+                
+                donationModalPermanent.classList.add('is-active');
+                donationModalPermanent.setAttribute('aria-hidden', 'false');
+                document.body.classList.add('modal-open');
+            }
+
+            function closeDonationModalPermanent() {
+                if (!donationModalPermanent) return;
+                
+                donationModalPermanent.classList.remove('is-active');
+                donationModalPermanent.setAttribute('aria-hidden', 'true');
+                document.body.classList.remove('modal-open');
+            }
+
+            // Event listeners
+            if (closeDonationModalBtn) {
+                closeDonationModalBtn.addEventListener('click', closeDonationModal);
+            }
+
+            if (closeDonationModalPermanentBtn) {
+                closeDonationModalPermanentBtn.addEventListener('click', closeDonationModalPermanent);
+            }
+
+            if (supportButton) {
+                supportButton.addEventListener('click', openDonationModalPermanent);
+            }
+
+            if (donationModal) {
+                donationModal.addEventListener('click', function(e) {
+                    if (e.target === donationModal && !closeDonationModalBtn.disabled) {
+                        closeDonationModal();
+                    }
+                });
+            }
+
+            if (donationModalPermanent) {
+                donationModalPermanent.addEventListener('click', function(e) {
+                    if (e.target === donationModalPermanent) {
+                        closeDonationModalPermanent();
+                    }
+                });
+            }
+
+            // Escape key to close
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    if (donationModal && donationModal.classList.contains('is-active') && !closeDonationModalBtn.disabled) {
+                        closeDonationModal();
+                    }
+                    if (donationModalPermanent && donationModalPermanent.classList.contains('is-active')) {
+                        closeDonationModalPermanent();
+                    }
+                }
+            });
+
+            // Show donation modal after 25 seconds of video playback
+            setTimeout(function() {
+                openDonationModal();
+            }, 25000);
         })();
     </script>
     <div id="site-footer"></div>

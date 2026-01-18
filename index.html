@@ -122,6 +122,25 @@
         </div>
     </div>
 
+    <div class="donation-modal" id="donationModal" aria-hidden="true">
+        <div class="donation-modal-content" role="dialog" aria-modal="true" aria-label="Apoyo al creador">
+            <button class="donation-modal-close" type="button" id="closeDonationModalBtn" aria-label="Cerrar" disabled>✕</button>
+            <div class="donation-modal-body">
+                <h2 class="donation-modal-title">¡Apoya este contenido! 🇨🇴</h2>
+                <p class="donation-modal-message">
+                    Si eres de Colombia y disfrutas este contenido, quiero que sepas que lo hice con mucho cariño para ti.<br>
+                    Tu apoyo me ayuda a seguir creando y mejorando esta página.<br><br>
+                    Si deseas apoyarme con una donación, puedes hacerlo a través de:<br>
+                    <strong>Bre-B: 3008906589</strong> o <strong>Nequi: 3008906589</strong>.<br><br>
+                    ¡Gracias por tu apoyo y sigue disfrutando de tu serie favorita! ❤️
+                </p>
+                <div class="donation-modal-timer" id="donationTimer">
+                    Esta ventana se cerrará en <span id="timerCountdown">10</span> segundos
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         (function () {
             const video = document.getElementById('bgVideo');
@@ -350,6 +369,90 @@
             });
             updateUi();
             updateModalUi();
+
+            // Donation Modal Functionality
+            const donationModal = document.getElementById('donationModal');
+            const closeDonationModalBtn = document.getElementById('closeDonationModalBtn');
+            const timerCountdown = document.getElementById('timerCountdown');
+            const donationTimer = document.getElementById('donationTimer');
+            
+            let countdownInterval;
+            let closeTimeout;
+            let enableCloseTimeout;
+            let timeRemaining = 10;
+
+            function openDonationModal() {
+                if (!donationModal) return;
+                
+                // Reset state
+                timeRemaining = 10;
+                closeDonationModalBtn.disabled = true;
+                timerCountdown.textContent = timeRemaining;
+                
+                // Show modal
+                donationModal.classList.add('is-active');
+                donationModal.setAttribute('aria-hidden', 'false');
+                document.body.classList.add('modal-open');
+                
+                // Enable close button after 5 seconds
+                enableCloseTimeout = setTimeout(function() {
+                    if (closeDonationModalBtn) {
+                        closeDonationModalBtn.disabled = false;
+                    }
+                }, 5000);
+                
+                // Start countdown
+                countdownInterval = setInterval(function() {
+                    timeRemaining--;
+                    timerCountdown.textContent = timeRemaining;
+                    
+                    if (timeRemaining <= 0) {
+                        closeDonationModal();
+                    }
+                }, 1000);
+                
+                // Auto-close after 10 seconds
+                closeTimeout = setTimeout(function() {
+                    closeDonationModal();
+                }, 10000);
+            }
+
+            function closeDonationModal() {
+                if (!donationModal) return;
+                
+                // Clear all timeouts and intervals
+                clearTimeout(closeTimeout);
+                clearTimeout(enableCloseTimeout);
+                clearInterval(countdownInterval);
+                
+                // Hide modal
+                donationModal.classList.remove('is-active');
+                donationModal.setAttribute('aria-hidden', 'true');
+                document.body.classList.remove('modal-open');
+            }
+
+            // Event listeners
+            if (closeDonationModalBtn) {
+                closeDonationModalBtn.addEventListener('click', closeDonationModal);
+            }
+
+            if (donationModal) {
+                donationModal.addEventListener('click', function(e) {
+                    if (e.target === donationModal && !closeDonationModalBtn.disabled) {
+                        closeDonationModal();
+                    }
+                });
+            }
+
+            // Escape key to close (only when close button is enabled)
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && donationModal && donationModal.classList.contains('is-active') && !closeDonationModalBtn.disabled) {
+                    closeDonationModal();
+                }
+            });
+
+            // Open donation modal on page load after a short delay
+            setTimeout(openDonationModal, 1000);
         })();
     </script>
     <div id="site-footer"></div>
