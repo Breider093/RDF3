@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breider David | Streaming HD</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 50%, #0f0f0f 100%);
+            min-height: 100vh;
+            color: #ffffff;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #e50914 0%, #ff4458 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-item {
+            color: #b3b3b3;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .nav-item:hover {
+            color: #ffffff;
+        }
+
+        .nav-item.active {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 40px 60px;
+        }
+
+        /* Video Section */
+        .video-section {
+            background: linear-gradient(145deg, #1a1a1a 0%, #141414 100%);
+            border-radius: 16px;
+            padding: 0;
+            margin-bottom: 40px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .video-header {
+            padding: 30px 35px 20px;
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .video-meta {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            color: #b3b3b3;
+            font-size: 14px;
+            margin-top: 12px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .badge {
+            background: rgba(229, 9, 20, 0.15);
+            color: #e50914;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            background: #000000;
+        }
+
+        iframe {
+            display: block;
+            width: 100%;
+            height: 700px;
+            border: none;
+        }
+
+        /* Controls Section */
+        .controls-section {
+            padding: 25px 35px;
+            background: rgba(0, 0, 0, 0.2);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        button {
+            background: rgba(255, 255, 255, 0.08);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 14px 28px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        button:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button.primary {
+            background: linear-gradient(135deg, #e50914 0%, #b20710 100%);
+            border: none;
+        }
+
+        button.primary:hover {
+            background: linear-gradient(135deg, #f40612 0%, #c5070f 100%);
+            box-shadow: 0 6px 20px rgba(229, 9, 20, 0.4);
+        }
+
+        /* Info Section */
+        .info-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .info-card {
+            background: linear-gradient(145deg, #1a1a1a 0%, #141414 100%);
+            border-radius: 12px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            border-color: rgba(229, 9, 20, 0.3);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        .info-card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #e50914;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .info-card p {
+            color: #b3b3b3;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* Caracol Banner */
+        .caracol-banner {
+            background: linear-gradient(145deg, #1a1a1a 0%, #141414 100%);
+            border-radius: 16px;
+            padding: 40px;
+            margin-top: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .banner-content {
+            display: flex;
+            gap: 30px;
+            align-items: flex-start;
+            margin-bottom: 40px;
+        }
+
+        .banner-icon {
+            font-size: 64px;
+            line-height: 1;
+            filter: drop-shadow(0 4px 8px rgba(229, 9, 20, 0.3));
+        }
+
+        .banner-text h2 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+        }
+
+        .banner-text p {
+            color: #b3b3b3;
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .banner-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 25px;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .stat-item strong {
+            font-size: 32px;
+            font-weight: 800;
+            color: #e50914;
+            line-height: 1;
+        }
+
+        .stat-item span {
+            font-size: 13px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .programming-highlights {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 35px;
+        }
+
+        .programming-highlights h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: #ffffff;
+        }
+
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .highlight-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .highlight-item:hover {
+            background: rgba(229, 9, 20, 0.05);
+            border-color: rgba(229, 9, 20, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .highlight-icon {
+            font-size: 36px;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        .highlight-item strong {
+            display: block;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .highlight-item p {
+            color: #888;
+            font-size: 13px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-brand {
+            font-size: 18px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #e50914 0%, #ff4458 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .footer-text {
+            color: #666;
+            font-size: 13px;
+        }
+
+        /* Loading Animation */
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(229, 9, 20, 0.1);
+            border-top-color: #e50914;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .nav-menu {
+                gap: 15px;
+            }
+
+            .nav-item {
+                font-size: 13px;
+            }
+
+            .container {
+                padding: 20px 20px 40px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            iframe {
+                height: 280px;
+            }
+
+            .controls {
+                justify-content: center;
+            }
+
+            button {
+                flex: 1;
+                min-width: 140px;
+                justify-content: center;
+            }
+
+            .video-header {
+                padding: 20px;
+            }
+
+            .controls-section {
+                padding: 20px;
+            }
+
+            .banner-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .banner-icon {
+                font-size: 48px;
+            }
+
+            .banner-text h2 {
+                font-size: 22px;
+            }
+
+            .banner-stats {
+                gap: 20px;
+            }
+
+            .stat-item strong {
+                font-size: 24px;
+            }
+
+            .caracol-banner {
+                padding: 25px;
+            }
+
+            .highlights-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            iframe {
+                height: 220px;
+            }
+
+            .info-section {
+                grid-template-columns: 1fr;
+            }
+
+            .highlights-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .banner-stats {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="logo">BREIDER DAVID</div>
+        <nav class="nav-menu">
+            <a class="nav-item" href="index.html">Inicio</a>
+            <a class="nav-item active">En Vivo</a>
+            <a class="nav-item" href="season-3.html">Episodios</a>
+            <a class="nav-item">Mi Lista</a>
+        </nav>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Video Section -->
+        <div class="video-section">
+            <div class="video-header">
+                <h1>📺 Caracol Televisión - En Vivo HD</h1>
+                <div class="video-meta">
+                    <span class="badge">EN VIVO</span>
+                    <div class="meta-item">
+                        <span>⭐</span>
+                        <span>HD 1080p</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>🎬</span>
+                        <span>2026</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>🇨🇴</span>
+                        <span>Colombia</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="video-wrapper">
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                </div>
+                <iframe 
+                    id="videoFrame"
+                    src="https://cdn.chatytvgratis.net/embed.php?id=caracolhd2" 
+                    width="100%" 
+                    height="700" 
+                    frameborder="0" 
+                    scrolling="no" 
+                    allow="autoplay; picture-in-picture" 
+                    allowfullscreen
+                    onload="hideLoading()">
+                </iframe>
+            </div>
+
+            <div class="controls-section">
+                <div class="controls">
+                    <button class="primary" onclick="toggleFullscreen()">
+                        <span>⛶</span>
+                        Pantalla Completa
+                    </button>
+                    <button onclick="reloadStream()">
+                        <span>↻</span>
+                        Recargar Stream
+                    </button>
+                    <button onclick="shareStream()">
+                        <span>⤴</span>
+                        Compartir
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Info Cards -->
+        <div class="info-section">
+            <div class="info-card">
+                <h3>📡 Caracol Televisión</h3>
+                <p>Canal principal de televisión colombiana fundado en 1954. Líder en entretenimiento, noticias y producción de telenovelas reconocidas internacionalmente.</p>
+            </div>
+            <div class="info-card">
+                <h3>🎭 Programación Variada</h3>
+                <p>Disfruta de novelas colombianas, noticieros, programas de entretenimiento, deportes y mucho más. Contenido de calidad para toda la familia.</p>
+            </div>
+            <div class="info-card">
+                <h3>🌎 Señal Internacional</h3>
+                <p>Caracol Televisión transmite su señal a millones de hogares en Colombia y el mundo, siendo uno de los canales más vistos de América Latina.</p>
+            </div>
+        </div>
+
+        <!-- Caracol TV Info Banner -->
+        <div class="caracol-banner">
+            <div class="banner-content">
+                <div class="banner-icon">🇨🇴</div>
+                <div class="banner-text">
+                    <h2>Sobre Caracol Televisión</h2>
+                    <p>Caracol Televisión es uno de los canales de televisión más importantes de Colombia y América Latina. Conocido por sus producciones de alta calidad, el canal ha sido cuna de exitosas telenovelas como "Betty la Fea", "Sin Senos No Hay Paraíso", "El Patrón del Mal", entre muchas otras que han conquistado audiencias internacionales.</p>
+                    <div class="banner-stats">
+                        <div class="stat-item">
+                            <strong>+70</strong>
+                            <span>Años al aire</span>
+                        </div>
+                        <div class="stat-item">
+                            <strong>24/7</strong>
+                            <span>Transmisión</span>
+                        </div>
+                        <div class="stat-item">
+                            <strong>#1</strong>
+                            <span>En Colombia</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="programming-highlights">
+                <h3>🎬 Programación Destacada</h3>
+                <div class="highlights-grid">
+                    <div class="highlight-item">
+                        <span class="highlight-icon">📰</span>
+                        <strong>Noticias Caracol</strong>
+                        <p>Información de última hora</p>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-icon">🎭</span>
+                        <strong>Telenovelas</strong>
+                        <p>Producciones originales</p>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-icon">⚽</span>
+                        <strong>Deportes</strong>
+                        <p>Fútbol y más</p>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-icon">🎤</span>
+                        <strong>Entretenimiento</strong>
+                        <p>Shows y concursos</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="footer-brand">BREIDER DAVID</div>
+        <p class="footer-text">© 2026 Breider David Streaming. Todos los derechos reservados.</p>
+    </div>
+
+    <script>
+        // Ocultar loading cuando el iframe carga
+        function hideLoading() {
+            const loading = document.getElementById('loading');
+            if (loading) {
+                loading.style.display = 'none';
+            }
+        }
+
+        // Función para pantalla completa
+        function toggleFullscreen() {
+            const iframe = document.getElementById('videoFrame');
+            
+            if (iframe.requestFullscreen) {
+                iframe.requestFullscreen();
+            } else if (iframe.webkitRequestFullscreen) {
+                iframe.webkitRequestFullscreen();
+            } else if (iframe.msRequestFullscreen) {
+                iframe.msRequestFullscreen();
+            }
+        }
+
+        // Función para recargar el stream
+        function reloadStream() {
+            const iframe = document.getElementById('videoFrame');
+            const loading = document.getElementById('loading');
+            
+            loading.style.display = 'block';
+            const currentSrc = iframe.src;
+            iframe.src = '';
+            
+            setTimeout(() => {
+                iframe.src = currentSrc;
+            }, 100);
+        }
+
+        // Función para compartir
+        function shareStream() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Breider David Streaming',
+                    text: 'Mira esta transmisión en vivo',
+                    url: window.location.href
+                }).catch(() => {});
+            } else {
+                // Fallback: copiar al portapapeles
+                navigator.clipboard.writeText(window.location.href);
+                alert('¡Enlace copiado al portapapeles!');
+            }
+        }
+
+        // Animación suave al cargar
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 0.5s ease';
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+
+        console.log('🎬 Breider David Streaming | Powered by 2026 Technology');
+    </script>
+</body>
+</html>
