@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Player 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a0a2e 0%, #0f051d 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            padding: 20px 0;
+            position: relative;
+        }
+
+        /* Animated background elements */
+        .bg-circle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.15;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .circle-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, #ff1493 0%, transparent 70%);
+            top: -200px;
+            right: -200px;
+            animation-delay: 0s;
+        }
+
+        .circle-2 {
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, #ff69b4 0%, transparent 70%);
+            bottom: -300px;
+            left: -300px;
+            animation-delay: 5s;
+        }
+
+        .circle-3 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #ffb6c1 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: 10s;
+        }
+
+        /* Floating dots inspired by the image */
+        .dot {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.6);
+            animation: floatDot 15s infinite ease-in-out;
+        }
+
+        .dot:nth-child(1) { top: 20%; left: 15%; animation-delay: 0s; }
+        .dot:nth-child(2) { top: 40%; left: 25%; animation-delay: 2s; }
+        .dot:nth-child(3) { top: 60%; left: 20%; animation-delay: 4s; }
+        .dot:nth-child(4) { top: 80%; left: 30%; animation-delay: 6s; }
+        .dot:nth-child(5) { top: 30%; right: 20%; animation-delay: 1s; }
+        .dot:nth-child(6) { top: 50%; right: 15%; animation-delay: 3s; }
+        .dot:nth-child(7) { top: 70%; right: 25%; animation-delay: 5s; }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            33% {
+                transform: translate(30px, -30px) scale(1.1);
+            }
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+        }
+
+        @keyframes floatDot {
+            0%, 100% {
+                transform: translateY(0px);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translateY(-30px);
+                opacity: 1;
+            }
+        }
+
+        /* Main container */
+        .container {
+            position: relative;
+            z-index: 10;
+            width: 95%;
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 25px 20px;
+            box-shadow: 
+                0 8px 32px 0 rgba(255, 20, 147, 0.2),
+                inset 0 1px 1px rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 105, 180, 0.2);
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            font-size: 2em;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ff69b4, #ff1493, #c71585);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        .header p {
+            color: #ffb6c1;
+            font-size: 1em;
+            opacity: 0.9;
+        }
+
+        /* Serie Info Section */
+        .serie-info {
+            margin-top: 30px;
+        }
+
+        .info-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255, 105, 180, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 105, 180, 0.3);
+        }
+
+        .info-card h2 {
+            color: #ff69b4;
+            font-size: 1.2em;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .info-card p {
+            color: #ffb6c1;
+            font-size: 0.95em;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .info-card strong {
+            color: #ff1493;
+            font-weight: 600;
+        }
+
+        .info-card.highlight {
+            background: linear-gradient(135deg, rgba(255, 20, 147, 0.1), rgba(255, 105, 180, 0.05));
+            border: 2px solid rgba(255, 20, 147, 0.3);
+        }
+
+        .cast-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .cast-member {
+            background: rgba(255, 20, 147, 0.2);
+            color: #ffb6c1;
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-size: 0.9em;
+            border: 1px solid rgba(255, 105, 180, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .cast-member:hover {
+            background: rgba(255, 20, 147, 0.3);
+            transform: scale(1.05);
+        }
+
+        .creator-credit {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(255, 20, 147, 0.15), rgba(199, 21, 133, 0.15));
+            border-radius: 15px;
+            border: 2px solid rgba(255, 105, 180, 0.3);
+        }
+
+        .creator-credit p {
+            color: #ffb6c1;
+            font-size: 1.2em;
+            margin: 0;
+        }
+
+        .creator-credit strong {
+            background: linear-gradient(135deg, #ff69b4, #ff1493, #c71585);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 1.3em;
+            font-weight: 700;
+        }
+
+        /* Video container */
+        .video-wrapper {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 
+                0 20px 60px rgba(255, 20, 147, 0.3),
+                0 0 0 1px rgba(255, 105, 180, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .video-wrapper:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 25px 70px rgba(255, 20, 147, 0.4),
+                0 0 0 1px rgba(255, 105, 180, 0.4);
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            background: linear-gradient(135deg, #2a1a3f 0%, #1a0a2e 100%);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Controls decoration */
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .control-btn {
+            padding: 14px 25px;
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 0.95em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 20, 147, 0.3);
+            position: relative;
+            overflow: hidden;
+            min-width: 140px;
+            touch-action: manipulation;
+        }
+
+        .control-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+
+        .control-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 20, 147, 0.5);
+        }
+
+        .control-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px 0;
+            }
+
+            .container {
+                padding: 20px 15px;
+                width: 98%;
+                border-radius: 20px;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .header p {
+                font-size: 0.9em;
+            }
+
+            .video-wrapper {
+                border-radius: 15px;
+            }
+
+            .info-card {
+                padding: 18px;
+                border-radius: 12px;
+                margin-bottom: 12px;
+            }
+
+            .info-card h2 {
+                font-size: 1.1em;
+            }
+
+            .info-card p {
+                font-size: 0.9em;
+            }
+
+            .cast-member {
+                font-size: 0.85em;
+                padding: 8px 14px;
+            }
+
+            .creator-credit {
+                padding: 18px;
+                margin-top: 20px;
+            }
+
+            .creator-credit p {
+                font-size: 1em;
+            }
+
+            .controls {
+                gap: 8px;
+                margin: 15px 0;
+            }
+
+            .control-btn {
+                width: 48%;
+                min-width: auto;
+                padding: 12px 15px;
+                font-size: 0.9em;
+            }
+
+            .bg-circle {
+                opacity: 0.08;
+            }
+
+            .dot {
+                width: 8px;
+                height: 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.5em;
+            }
+
+            .control-btn {
+                width: 100%;
+                margin-bottom: 5px;
+            }
+
+            .controls {
+                flex-direction: column;
+            }
+
+            .cast-list {
+                gap: 8px;
+            }
+
+            .cast-member {
+                font-size: 0.8em;
+                padding: 6px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background elements -->
+    <div class="bg-circle circle-1"></div>
+    <div class="bg-circle circle-2"></div>
+    <div class="bg-circle circle-3"></div>
+
+    <!-- Floating dots -->
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+    <div class="dot"></div>
+
+    <!-- Main container -->
+    <div class="container">
+        <div class="header">
+            <h1>La Reina del Flow 3</h1>
+            <p>Disfruta la tercera temporada</p>
+        </div>
+
+        <!-- Video Player at Top -->
+        <div class="video-wrapper">
+            <div class="video-container">
+                <iframe 
+                    src="//ok.ru/videoembed/10988858187458?nochat=1" 
+                    frameborder="0" 
+                    allow="autoplay" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="control-btn" onclick="toggleFullscreen()">
+                <span>📺 Pantalla Completa</span>
+            </button>
+            <button class="control-btn" onclick="shareVideo()">
+                <span>✨ Compartir</span>
+            </button>
+        </div>
+
+        <!-- Serie Info Section -->
+        <div class="serie-info">
+            <div class="info-card">
+                <h2>🎭 Sobre la Serie</h2>
+                <p>Después de cuatro años, Yeimy Montoya y Charly Flow están casados y tienen una hija llamada Alma. Han construido una exitosa productora musical: <strong>Soul&Bass</strong>.</p>
+            </div>
+
+            <div class="info-card">
+                <h2>⚡ La Trama</h2>
+                <p>Su oscuro pasado regresa con la venganza de <strong>Mike Rivera</strong>, quien desde la cárcel planea destruirlos junto a los Vallejo, unos hackers dementes que son sus fanáticos. Un misterioso accidente hace que Yeimy desaparezca, y mientras el mundo la busca, <strong>Sky</strong>, una talentosa mecánica automotriz, se convierte en la nueva estrella de la productora.</p>
+            </div>
+
+            <div class="info-card">
+                <h2>🌟 Elenco Principal</h2>
+                <div class="cast-list">
+                    <span class="cast-member">Carolina Ramírez</span>
+                    <span class="cast-member">Carlos Torres</span>
+                    <span class="cast-member">Alisson Joan</span>
+                    <span class="cast-member">Marcelo Dos Santos</span>
+                    <span class="cast-member">Juan Manuel Restrepo</span>
+                </div>
+            </div>
+
+            <div class="info-card highlight">
+                <h2>📺 Detalles</h2>
+                <p><strong>• Episodios:</strong> 64 capítulos</p>
+                <p><strong>• Plataformas:</strong> Netflix y Caracol TV</p>
+                <p><strong>• Locación:</strong> Colombia y España</p>
+                <p><strong>• Género:</strong> Drama Musical</p>
+            </div>
+
+            <div class="creator-credit">
+                <p>✨ Presentado por <strong>Breider David</strong> ✨</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Fullscreen functionality
+        function toggleFullscreen() {
+            const iframe = document.querySelector('iframe');
+            if (iframe.requestFullscreen) {
+                iframe.requestFullscreen();
+            } else if (iframe.mozRequestFullScreen) {
+                iframe.mozRequestFullScreen();
+            } else if (iframe.webkitRequestFullscreen) {
+                iframe.webkitRequestFullscreen();
+            } else if (iframe.msRequestFullscreen) {
+                iframe.msRequestFullscreen();
+            }
+        }
+
+        // Share functionality
+        function shareVideo() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Video Player 2026',
+                    text: 'Mira este video increíble',
+                    url: window.location.href
+                }).catch(err => console.log('Error compartiendo:', err));
+            } else {
+                // Fallback: copy to clipboard
+                navigator.clipboard.writeText(window.location.href);
+                alert('¡Enlace copiado al portapapeles!');
+            }
+        }
+
+        // Add parallax effect to background circles
+        document.addEventListener('mousemove', (e) => {
+            const circles = document.querySelectorAll('.bg-circle');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+
+            circles.forEach((circle, index) => {
+                const speed = (index + 1) * 20;
+                const xMove = (x - 0.5) * speed;
+                const yMove = (y - 0.5) * speed;
+                circle.style.transform = `translate(${xMove}px, ${yMove}px)`;
+            });
+        });
+
+        // Add smooth entrance animation for dots
+        window.addEventListener('load', () => {
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, index) => {
+                setTimeout(() => {
+                    dot.style.opacity = '1';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>
