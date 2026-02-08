@@ -161,6 +161,54 @@
           "description": "capitulo 20",
           "embedUrl": "//ok.ru/videoembed/11278675086018?nochat=1",
           "downloadUrl": "https://anydownloader.com/anydl/dl.php?source=odnoklassniki&media=NA==&sid=73993fe17fffa60fe2e6e28662ec24938d81cae7&nonce=1636533a19"
+        },
+        {
+          "number": 21,
+          "title": "capitulo 21",
+          "thumbnail": "https://i.postimg.cc/cL1XZZBY/miniatura-base.jpg",
+          "description": "capitulo 21",
+          "embedUrl": "//ok.ru/videoembed/11279364721346?nochat=1",
+          "downloadUrl": ""
+        },
+        {
+          "number": 22,
+          "title": "capitulo 22",
+          "thumbnail": "https://i.postimg.cc/cL1XZZBY/miniatura-base.jpg",
+          "description": "capitulo 22",
+          "embedUrl": "//ok.ru/videoembed/11279401487042?nochat=1",
+          "downloadUrl": ""
+        },
+        {
+          "number": 23,
+          "title": "capitulo 23",
+          "thumbnail": "https://i.postimg.cc/cL1XZZBY/miniatura-base.jpg",
+          "description": "capitulo 23",
+          "embedUrl": "//ok.ru/videoembed/11279688338114?nochat=1",
+          "downloadUrl": ""
+        },
+        {
+          "number": 24,
+          "title": "capitulo 24",
+          "thumbnail": "https://i.postimg.cc/cL1XZZBY/miniatura-base.jpg",
+          "description": "capitulo 24",
+          "embedUrl": "//ok.ru/videoembed/11279453784770?nochat=1",
+          "downloadUrl": ""
+        },
+        {
+          "number": 25,
+          "title": "capitulo 25",
+          "thumbnail": "https://i.postimg.cc/cL1XZZBY/miniatura-base.jpg",
+          "description": "capitulo 25",
+          "embedUrl": "//ok.ru/videoembed/11279787100866?nochat=1",
+          "downloadUrl": ""
+        },
+        {
+          "number": 26,
+          "title": "capitulo 26",
+          "thumbnail": "https://i.postimg.cc/cL1XZZBY/miniatura-base.jpg",
+          "description": "capitulo 26",
+          "embedUrl": "//ok.ru/videoembed/11279839398594?nochat=1",
+          "downloadUrl": ""
         }
       ]
     }
